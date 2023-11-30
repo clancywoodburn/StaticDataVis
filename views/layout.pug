@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    title= vis
+    block extraHeader
+
+
+  block link
+  -var selected = 'home'; //default
+
+  -var menu = { 'Home': '/', 'Options': '#' };
+
+  -var tools = {'Set 1':'#', 'Set 2':'#', 'Set 3':'#','Set 4':'#','Set 5':'#','Random':'#'};
+
+  -var randoms = {'Compare Size':'#', 'Navigate':'#','Explore':'#','Node Relationship':'#','Common Ancestor':'#', 'Child Nodes':'#'}
+
+  -var drops = { 'Icicle': '/icicle.html', 'Sundown': '/sundown.html', 'Treemap':'/treemap.html', 'Sunburst': '/sunburst.html'}
+
+  -var resourceList = {'Research Log': '/blog/logbook', 'Resources':'/blog/resources','Overview': '/blog', 'Timeline': '/blog/timeline','Flowchart': '/blog/flowchart', "Issues/Bugs": '/blog/issues'}
+  include mixins
+
+  body
+
+    .header
+        +nav("Research Project - Data Visualisation", "navigationbar", "navbar-expand-lg navbar-dark bg-primary fixed-top")
+            +nav_item_dropdown( "#","nav-item active")( label="Visualisations" )
+                each val, key in drops
+                  +nav_dropdown_item( val, key ) #{key}
+            +nav_item_dropdown("#", "nav-item", "display:none")(label="Evaluate")
+              +nav_dropdown_item("#", "Show") Show Visualisation
+              div.dropdown-divider
+              +nav_dropdown_item("#", "Training") Training
+              div.dropdown-divider
+              each val, key in tools
+                +nav_dropdown_item( val, key ) #{key}
+              div.dropdown-divider
+              each val, key in randoms
+                +nav_dropdown_item( val, key ) #{key}
+              div.dropdown-divider
+              +nav_dropdown_item("https://goo.gl/forms/Redf0nnxQI1KB3Bp2", "Survey") Survey
+              div.dropdown-divider
+              +nav_dropdown_item("#", "Reports") Reports
+            +nav_item( "#", "Options" ,"nav-item" ) Options
+    block content
+
+    +bootswatch('cerulean')
+
+    block scripts
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js")
